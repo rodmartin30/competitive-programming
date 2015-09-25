@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int n;
+string s;
+vector<string> testCases;
+int main()
+{
+	cin >> n;
+	testCases.resize(n*n);
+	for(int i=0;i<n*n;i++)
+	{
+		cin >> testCases[i];
+	}
+	sort(testCases.begin(),testCases.end());
+	for(int i=0;i<(n*n)-1;i++)
+	{
+		cout << testCases[i] << " ";
+	}
+	cout << testCases[(n*n)-1];
+
+}

@@ -1,0 +1,43 @@
+#include <iostream>
+#include <set>
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
+#include <climits>
+#include <utility>
+#include <map>
+#include <sstream>
+#include <fstream>
+#include <cstring>
+#include <bitset>
+#define fore(i,m,n) \
+for(int i=m;i<n;i++)
+#define fori(i,m,n) \
+for(int i=m;i<=n;i++)
+#define T 1005
+#define M 9999999
+#define ii pair<int,int>
+using namespace std;
+
+char table[T][T];
+
+int main()
+{
+	int n,m;
+	while(scanf("%d %d",&n,&m) && n!=0 && m!=0)
+	{
+		fore(i,0,n)
+			fore(j,0,m)
+				cin >> table[i][j];
+			//scanf("%s",table[i]);
+		
+		fore(i,0,n)
+		{
+			fore(j,0,m)
+				cout << table[i][j] << " ";
+			cout << endl;
+		}
+	}
+}

@@ -1,0 +1,32 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#include <cmath>
+#include <sstream>
+
+using namespace std;
+
+int toInt(char c)
+{
+	string s="";
+	s+=c;
+	istringstream in(s);
+	int i;
+	in >> i;
+	return i;
+	
+}
+int main()
+{
+	string s;
+	
+	while(cin >> s && s!="0")
+	{
+		reverse(s.begin(),s.end());
+		long long c = 0;
+		for(int i=0;i<s.size();i++)
+			c=s[i]*pow(2,i+1)-1;
+		
+		cout << c << endl;
+	}
+}

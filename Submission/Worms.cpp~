@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+int n,m,temp;
+vector<int> vA,vQ,vS;
+
+int main()
+{
+	cin >> n;
+	for(int i=0;i<n;i++)
+	{
+		cin >> temp;
+		vA.push_back(temp);
+	}
+	vS.push_back(vA[0]);
+	for(int i=1;i<n;i++)
+	{
+		vS.push_back(vS[i-1]+vA[i]);
+		
+	}
+	cin >> m;
+	for(int i=0;i<m;i++)
+	{
+		cin >> temp;
+		for(int j=0;j<n-1;j++)
+		{
+			if(j==0)
+			{
+				if(temp<=vS[j])
+				{
+					cout << j+1 << endl;
+					break;
+				}
+			}
+			else
+			{
+				if(temp>vS[j] && temp <=vS[j+1])
+				{
+					cout << j+2 << endl;
+					break;
+				}
+			}
+		}
+
+	}
+
+}

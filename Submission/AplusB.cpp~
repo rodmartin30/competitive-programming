@@ -1,0 +1,20 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <fstream>
+#include <cstdio>
+using namespace std;
+double a;
+vector<double> salida;
+double stack[131073];
+int main()
+{
+	while(scanf("%lf",&a) != EOF)
+	{
+		salida.push_back(a);
+	}
+	for(int i=salida.size()-1;i>=0;i--) printf("%.4lf\n", floor(sqrt(salida[i])*10000)/10000);
+	
+	
+
+}

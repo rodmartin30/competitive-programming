@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+#include <vector>
+
+using namespace std;
+int n,m,temp;
+vector<int> vA,vQ,vS;
+int bs(int L, int num)
+{
+	int mx = L;
+	int mn = 0;
+	while(mx-mn>1)
+	{
+		int mid = (mx+mn) /2;
+		if(vS[mid]<num)
+		mn = mid;
+		else
+		mx = mid;
+	}
+	
+
+	return mn;
+}
+int main()
+{
+	cin >> n;
+	for(int i=0;i<n;i++)
+	{
+		cin >> temp;
+		vA.push_back(temp);
+	}
+	vS.push_back(vA[0]);
+	for(int i=1;i<n;i++)
+	{
+		vS.push_back(vS[i-1]+vA[i]);
+		
+	}
+	cin >> m;
+	for(int i=0;i<m;i++)
+	{
+		cin >> temp;
+		cout << bs(vA.size(),temp)+1 << endl;
+
+	}
+
+}

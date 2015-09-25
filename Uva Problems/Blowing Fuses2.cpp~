@@ -1,0 +1,25 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <climits>
+#include <algorithm>
+#include <map>
+#include <math.h>
+#include <queue>
+#include <utility>
+#include <set>
+#include <sstream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+
+int main()
+{
+    ofstream fout ("word.out");
+    ifstream fin ("word.in");
+    
+    string l1 = "1234567890-=QWERTYUIOP[]" + '\\' + "ASDFGHJKL;'ZXCVBNM,./";
+    cout << l1 <<endl;
+}

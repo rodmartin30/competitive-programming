@@ -1,0 +1,49 @@
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+bool output,esta;
+int n,s,q,aux;
+vector<int> vs,vq;
+int main()
+{
+	esta = output = true;
+	scanf("%d",&n);
+	scanf("%d",&s);
+	for(int i = 0;i<s;i++)
+	{
+		scanf("%d",&aux);
+		vs.push_back(aux);
+	}
+	scanf("%d",&q);
+	for(int i = 0;i<q;i++)
+	{
+		scanf("%d",&aux);
+		vs.push_back(aux);
+	}
+	sort(vs.begin(),vs.end());
+	for(int i = 1;i<=n;i++)
+	{
+		esta = false;
+		for(int j = 0;j<s+q;j++)
+		{
+			if(i==vs[j]) esta = true;
+		}
+		if(esta) output = true;
+		else 
+		{	
+			output = false;
+			break;
+		}
+	}
+	if(output) cout << "I become the guy.";
+	else cout << "Oh, my keyboard!";
+	
+
+
+	return 0;
+}

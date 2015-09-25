@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+#include <climits>
+ 
+using namespace std;
+int w,quitar;
+int s,aux;
+vector<int> q,n;
+bool mayor(int i,int j)
+{
+	return i>j;
+}
+bool busqueda_binaria(int num)
+{
+	int mn = 0, mx = n.size();
+	while(mx-mn > 1)
+	{
+		int med = (mx + mn) /2;
+		if (n[med] > num)
+		mx = med;
+		else
+		mn = med;
+	}
+	if(n[mn] >= num)
+	{
+		quitar = mn;
+		return true;
+	}
+	return false;
+}
+int main()
+{
+	w=0;
+	scanf("%d",&s);
+	for(int i =0;i<s;i++)
+	{
+		scanf("%d",&aux);
+		q.push_back(aux);
+	}
+	
+	for(int i =0;i<s;i++)
+	{
+		scanf("%d",&aux);
+		n.push_back(aux);
+	}
+	sort(n.begin(),n.end());
+	
+	for(int i =0;i<s;i++)
+	{
+		
+		if(busqueda_binaria(q[i]+1))
+		{
+			n.erase(n.begin()+quitar);
+			w++;
+		}
+	}
+	printf("%d",w);
+	
+	return 0;
+} 

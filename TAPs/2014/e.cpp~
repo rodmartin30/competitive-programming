@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+#define fore(i,a,n) for(int i=a;i<n;i++)
+
+using namespace std;
+
+typedef long long ll;
+
+vector<vector<int> > graph;
+vector<int> dist,visited;
+
+void bfs(int s,int N) {
+	visited.resize(N,0);
+	dist.resize(N,1e7);
+	
+	dist[s] = 0;
+	visited[s] = 1;
+	queue<int> q;
+	q.push(s);
+	int u,v,t;
+
+	while(!q.empty()) {
+		u = q.front();
+		q.pop();
+		
+		t = graph[u].size();
+		
+		fore(i,0,t) {
+			v = graph[u][i];
+			if(visited[v] == 0) {
+				visited[v] = 1;
+				dist[v] = dist[u] + 1;
+				q.push(v);
+			}
+		}
+	}
+
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	int a,n,tmp,hasta,mn,nodo;
+	bool erdos = false;
+	
+	cin >> a >> n;
+	graph.resize(n+a);
+	nodo = n;
+	
+	fore(g,0,a) {
+		cin >> hasta;
+		bool flag = false;
+		fore(i,0,hasta) {
+			cin >> tmp;
+			tmp--;
+			if(tmp == 1)
+				erdos = true;
+				
+			graph[nodo].push_back(tmp);
+			graph[tmp].push_back(nodo);	
+		}
+		nodo++;
+	} 
+	
+	int d=1,m=0,s=0;
+	bfs(0,nodo);
+	fore(i,1,n) {
+		if(dist[i] != 1e7) {
+			d++;
+			m = max(m,dist[i] >> 1);
+			s+=dist[i] >> 1;
+		}
+	}
+	
+	cout << d << " " << m << " " << s << endl;
+}

@@ -1,0 +1,69 @@
+#include <iostream>
+#include <utility>
+#include <algorithm>
+#define T 105
+#define fore(i,m,n) \
+for(int i=m;i<n;i++)
+#define fori(i,m,n) \
+for(int i=m;i<=n;i++)
+
+using namespace std;
+
+char table[T][T];
+vector<vector<int> > graph;
+vector<int> visited;
+
+void dfs(int s)
+{
+	estado[s] = 1;
+	int u = s;
+	fore(i,0,graph[u].size())
+	{
+		v = graph[u][i];
+		if(estado[v] == 0)
+			dfs(v);
+	}
+	
+}
+int main()
+{
+	int n,m;
+	
+	while(cin >> n >> m & n+m!=0)
+	{
+		int cant = 0;
+		visited.clear(); visited.resize(n*m);
+		graph.clear(); graph.riseze(n*m);
+		
+		fore(i,0,n)
+			fore(i,0,m)
+				cin >> table[i][j];
+		
+		fore(i,0,n)
+			fore(i,0,m)
+			{
+				if(i!=0 && table[i][j] == '@' && table[i-1][j] == '@')
+					graph[i*m+j].push_back((i-1)*m+j);
+					
+				if(i!=n-1 && table[i][j] == '@' && table[i+1][j] == '@')
+					graph[i*m+j].push_back((i+1)*m+j);
+					
+				if(j!=0 && table[i][j] == '@' && table[i][j-1] == '@')
+					graph[i*m+j].push_back(i*m+j-1);
+					
+				if(j!=m-1 && table[i][j] == '@' && table[i][j+1] == '@')
+					graph[i*m+j].push_back(i*m+j+1);
+			}
+			
+		fore(i,0,n*m)
+			if(estado[i]==0)
+			{
+				dfs(i);
+				cant++;
+			}
+		
+		cout << cant << endl;
+	}
+	
+}
+

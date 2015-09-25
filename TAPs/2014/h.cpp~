@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+#define fore(i,a,n) for(int i=a;i<n;i++)
+#define N 500005
+#define EPS 1e-9
+using namespace std;
+
+typedef long long ll;
+typedef pair<int,int> ii;
+
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+int lcm(int a, int b) { return a* (b / gcd(a,b)); }
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	int test,n,tmp;
+	cin >> test;
+	
+	while(test--) {
+		cin >> n;
+		
+		int cant = 0;
+		fore(i,2184,2200) {
+			if(gcd(i,i+1) != 1) cant++;
+		}
+	
+	}
+}

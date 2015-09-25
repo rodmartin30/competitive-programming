@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+#define fore(i,a,n) for(int i=a;i<n;i++)
+#define N 1000010
+#define endl '\n'
+#define mk make_pair
+using namespace std;
+typedef long long ll;
+typedef pair<int,int> ii;
+
+
+ll mapa[605][605],di[4]={0,1,0,-1},dj[4] = {1,0,-1,0};
+ll n,m,res= -1,last,V;
+vector<ll> visited,dist;
+vector<vector<int> > graph;
+bool bound(int i,int j) {
+	if(i >= 0 && i < n && j >= 0 && j < m)
+		return true;
+	return false;
+}
+
+bool bfs(ll val) {
+ visited.clear(); visited.resize(V);
+ dist.clear(); dist.resize(V,1e14);
+ 
+ dist[0] = val;
+ visited[0] = 1;
+ queue<int> q;
+ q.push(0);
+ 
+ int u,v,t,ni,nj;
+ 
+ while(!q.empty()) {
+ 	u = q.front(); q.pop();
+ 	t = graph[u].size();
+ 	fore(i,0,t) {
+ 		v = graph[u][i];
+ 		nj = v%m; ni = (v-nj)/m;
+ 		if(dist[u] + 1 < mapa[ni][nj] && !visited[v]) {
+ 			dist[v] = dist[u]+1;
+ 			q.push(v);
+ 			visited[v] = 1;
+ 		}
+ 	}
+ }
+ return (dist[V-1] != 1e14);
+}
+int main() {
+	ios_base::sync_with_stdio(false);
+	ll mn,mx;
+	cin >> n >> m;
+	fore(i,0,n)
+		fore(j,0,m)
+			cin >> mapa[i][j];
+			
+	graph.resize(n*m);
+	fore(i,0,n)
+		fore(j,0,m)
+			fore(k,0,4) {
+				if(bound(i+di[k],j+dj[k]))
+					graph[i*m+j].push_back((i+di[k])*m+j+dj[k]);
+			}
+	
+	mn = 0;mx = mapa[0][0]; res = -1; V = n*m;
+	
+	while(mx-mn > 1) {
+		ll mid = (mx+mn)/2;
+		if(bfs(mid)) {
+			res = max(res,mid);
+			mn = mid;
+		}
+		else
+			mx = mid;
+	}
+	
+	if(bfs(mn))
+		res = max(res,mn);
+	else if(bfs(mx))
+		res = max(res,mx);
+	
+	cout << res << endl;
+}

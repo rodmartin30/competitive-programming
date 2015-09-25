@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define fore(i,a,n) for(int i=a;i<n;i++)
+#define endl '\n'
+using namespace std;
+
+typedef long long ll;
+int table[505][505];
+
+int main(){
+	ios_base::sync_with_stdio(false);
+	int n,m,q,l,u,t;
+	while(cin >> n >> m && n && m) {
+		fore(i,0,n)
+			fore(j,0,m)
+				cin >> table[i][j];
+				
+		cin >> q;
+		
+		fore(i,0,q) {
+			cin >> l >> u;
+			int mx = 0,cur;
+			fore(i,0,n) {
+				t = lower_bound(table[i],table[i]+m,l) - table[i];
+				if(table[i][t] <= u) {
+					cur = 0;
+					int a=i;
+					while(a < n && t<m && table[a][t]) {
+						cur++;
+						a++; t++;
+					}
+					i = a;
+				}
+			}
+			
+		}
+		cout << "-" << endl;
+	
+	}
+}
+		
+

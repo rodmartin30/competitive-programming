@@ -1,0 +1,104 @@
+#include <bits/stdc++.h>
+#define fore(i,a,n) for(int i=a;i<n;i++)
+using namespace std;
+
+vector<vector<int> > graph,lvl;
+vector<int> dist,visited,padre,take,p;
+
+int bfs(int s, int n) {
+	dist.clear();
+	dist.resize(n,1e8);
+	visited.clear();
+	visited.resize(n,0);
+	lvl.clear();
+	lvl.resize(n);
+	padre.clear();
+	padre.resize(n);
+	
+	dist[s] = 0;
+	visited[s] = 1;
+	padre[s] = -1;
+	lvl[0].push_back(s);
+	queue<int> q;
+	q.push(s);
+	
+	int u,v,t,mx = 0;
+	
+	while(!q.empty()) {
+		u = q.front();
+		q.pop();
+		
+		t = graph[u].size();
+		
+		fore(i,0,t) {
+			v = graph[u][i];
+			
+			if(visited[v] == 0) {
+				dist[v] = dist[u] + 1;
+				lvl[dist[v]].push_back(v);
+				mx = max(dist[v],mx);
+				padre[v] = u;
+				visited[v] = 1;
+				q.push(v);				
+			}	
+		}	
+	}
+	return mx;
+}
+
+
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	int test;
+	cin >> test;
+	
+	while(test--) {
+		int n,tmp,mx;
+		long long res = 0;
+		cin >> n;
+		
+		graph.clear();
+		graph.resize(n);
+		take.clear();
+		take.resize(n);
+		p.clear();
+		
+		fore(i,1,n) {
+			cin >> tmp;
+			tmp--;
+			graph[i].push_back(tmp);
+			graph[tmp].push_back(i);
+		}
+	
+		mx = bfs(0,n);
+		
+		while(mx) {
+			int t = lvl[mx].size(),u,v;
+			
+			fore(i,0,t) {
+				v = lvl[mx][i];
+				u = padre[v];
+				
+				if(take[v] == 0 && take[u] == 0) {
+					res++;
+					take[v] = 1;
+					take[u] = 1;
+					p.push_back(v+1);
+				}			
+			}
+			mx--;		
+		}
+		sort(p.begin(),p.end());
+		cout << res * 1000 << endl;
+		fore(i,0,p.size()) {
+			if(i)
+				cout << " ";
+			cout << p[i];
+		}
+		cout << endl;
+		
+	}
+	
+
+}
